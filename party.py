@@ -15,7 +15,6 @@ def is_mel(name, email):
     >>> is_mel('hello kitty', 'hellokitty@gmail.com')
     False
     >>> 
-
     """
 
     return name == "Mel Melitpolski" or email == "mel@ubermelon.com"

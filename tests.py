@@ -7,16 +7,24 @@ class PartyTests(unittest.TestCase):
     """Tests for my party site."""
 
     def setUp(self):
+        # Flask app has the feature method .test_client(). Allows Flask to 
+        # test the client
         self.client = party.app.test_client()
+        # prints and error messages to the same console 
         party.app.config['TESTING'] = True
 
     def test_homepage(self):
+        # tests whether the string 'im having a party' is returned in the
+        # results.
         result = self.client.get("/")
         self.assertIn("I'm having a party", result.data)
 
     def test_no_rsvp_yet(self):
         # FIXME: Add a test to show we haven't RSVP'd yet
-        print "FIXME"
+        result = self.client.get("/")
+        self.assertIn("Please RSVP", result.data)
+        self.assertNotIn("123 Magic Unicorn Way", result.data)
+
 
     def test_rsvp(self):
         result = self.client.post("/rsvp",
